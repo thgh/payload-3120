@@ -12,10 +12,12 @@ import config from './payload.config'
       provide: 'CMS',
       inject: [HttpAdapterHost, ConfigService],
       scope: Scope.DEFAULT, // Singleton
-      useFactory: async (httpAdapterHost: HttpAdapterHost, configService: ConfigService) => {
+      useFactory: async (
+        httpAdapterHost: HttpAdapterHost,
+        configService: ConfigService
+      ) => {
         return await payload.init({
           secret: configService.getOrThrow('cms.secret'),
-          mongoURL: configService.getOrThrow('cms.mongoUrl'),
           express: httpAdapterHost.httpAdapter.getInstance(),
           config,
         })
@@ -24,5 +26,4 @@ import config from './payload.config'
   ],
   exports: [CmsService, 'CMS'],
 })
-export class CmsModule {
-}
+export class CmsModule {}

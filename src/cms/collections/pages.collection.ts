@@ -21,7 +21,7 @@ export const Pages: CollectionConfig = {
       validate: async (value: string, { payload, id }) => {
         if (!payload) return true
 
-        const conflicts = await payload.find<'pages'>({
+        const conflicts = await payload.find({
           collection: 'pages',
           where: { slug: { equals: value }, and: [{ id: { not_equals: id } }] },
         })

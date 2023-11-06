@@ -4,7 +4,10 @@ import { Payload } from 'payload'
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService, @Inject('CMS') private readonly cms: Payload) {}
+  constructor(
+    private readonly appService: AppService,
+    @Inject('CMS') private readonly cms: Payload
+  ) {}
 
   @Get()
   getHello(): string {
@@ -13,7 +16,7 @@ export class AppController {
 
   @Get('test')
   async getTest(): Promise<string[]> {
-    const pages = await this.cms.find<'pages'>({ collection: 'pages', where: {}})
+    const pages = await this.cms.find({ collection: 'pages', where: {} })
     return pages.docs.map((page) => {
       return page.title
     })
